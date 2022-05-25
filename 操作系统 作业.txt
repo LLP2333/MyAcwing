@@ -1,0 +1,106 @@
+第一题
+
+semaphore mutex1=1,mutex2=1,first=1;//mutex1和mutex实现计数器互斥访问，first为
+//两边允许上桥的互斥信号量
+int count1=0,count2=0;//两边车辆上桥计数器
+
+左边的汽车:
+while(1){
+
+P(mutex1);
+if(++count1==1)
+P(first);
+V(mutex1);
+上桥，通过;
+P(mutex1);
+if(--count1==0)
+V(first);
+V(mutex1);
+
+}
+右边的汽车:
+while(1){
+    P(mutex2);
+    if(++count2==1)
+    P(first);
+    V(mutex2);
+    上桥，通过;
+    P(mutex2);
+    if(--mutex2==0)
+    V(first);
+    V(mutex2);
+}
+
+第二题
+
+int waiting=0; //等候理发顾客数 
+int CHAIRS=n; //为顾客准备的椅子数 
+semaphore customers=0,barbers=0,mutex=1; 
+
+
+process barber( ) { 
+while(true) { 
+P(customers); //有顾客吗？若无顾客，理发师睡眠 
+P(mutex); //若有顾客时，进入临界区 
+waiting--; //等候顾客数少一个 
+V(barbers); //理发师准备为顾客理发 
+V(mutex); //退出临界区 
+cut_hair(); //理发师正在理发(非临界区) 
+} 
+}
+
+process customer_i( ) { 
+P(mutex); //进入临界区 
+if(waiting<CHAIRS) { //有空椅子吗 
+waiting++; //等候顾客数加1 
+V(customers); //唤醒理发师 
+V(mutex); //退出临界区 
+P(barbers); //理发师忙，顾客坐下等待 
+get_haircut(); //否则顾客坐下理发 
+} 
+else 
+V(mutex); //人满了，离开！ 
+} 
+
+第三题
+
+semaphore mutex1=1,mutex2=1;//控制衣架和裤架的互斥操作
+semaphore empty1=50,empty2=50,full1=0,full2=0;//empty11和empty2分别表示衣架和裤架的空位数
+
+甲制作室工人:
+while(1){
+    生产一件上衣;
+    P(empty1);
+    P(mutex1);
+    将上衣放到衣架;
+    V(mutex1);
+    V(full1);
+}
+
+乙制作室工人:
+while(1){
+    生产一条裤子;
+    P(empty2);
+    P(mutex2);
+    将裤子放到裤架;
+    V(mutex2);
+    V(full2);
+
+}
+
+配套工人工作:
+while(1){
+    P(full1);
+    P(full2);
+    P(mutex1);
+    P(mutex2);
+    分别取上衣和裤子进行配套;
+    V(mutex1);
+    V(mutex2);
+    V(empty1);
+    V(empty2);
+}
+
+
+
+
