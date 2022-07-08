@@ -1,0 +1,71 @@
+//1
+Function Factor2(n As Interger) As Long
+ Dim i As Interger,p As Long
+ p=1
+ For i=1 To n
+ p=p*i 
+ Next i 
+ Factor2=p
+ End Function
+ Sub MySum2
+  Dim n As Interger,s As Long
+  For n=1 To 10
+  s=s+Factor2(n)
+  Next n 
+  MsfBox "结果为:" & s 
+  End Sub
+
+//2
+Sub Cmdl_Click()
+  Dim x As Interger,y As Interger
+  x=10
+  y=20
+  Debug.Print"1,x=";x,"y=";y
+  Call Add(x,y)
+  Debug.Print"2,x=";"y=";y
+End Sub
+
+Private Sub Add(m,n)
+ m=100
+ n=200
+ m=m+n 
+ n=2*n+m 
+End Sub
+
+//3
+Sub Cmd2_Click()
+ Dim x As Interger As Interger
+ x=10
+ y=20
+ Debug.Print"1,x=";x"y=";y
+ Call Add(x,y)
+ Debug.Print"2,x=";x"y=";y
+End Sub
+
+Private Sub Add(ByVal m,n)
+ m=100
+ n=200
+ n=2*n+m 
+End Sub
+
+//4
+Private Sub Command_Click()
+  Static a As Interger  '静态变量
+  a=a+1
+  Debug.Print a 
+End Sub 
+
+Private Sub Command_Click()
+ Dim a As Interger
+ Debug.Print a 
+End Sub
+
+//5
+Sub CreateConnection()
+ Dim cnn As ADODB CreateConnection          '声明连接对象
+ Set cnn New ADODB.Connection               '实例化对象
+ cnn.Open "Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;Data Source=
+ E:\AccessDB\教学管理。accdb;"               '打开连接
+ cnn.Close                                  '关闭连接
+ Set cnn=Nothing                            '撤销连接
+End Sub
