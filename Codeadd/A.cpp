@@ -7,10 +7,10 @@ string s;
 int main()
 {
     cin>>n;
-    for(int i=0;i<n;i++)
+    for(int i=0;i<=n+1;i++)
     {
-       cout<<i<<endl;
-       cin>>s;
+      
+      getline(cin,s);
        char x;
        
        int res=0;
@@ -20,27 +20,24 @@ int main()
         cout<<"CE"<<endl;
         continue;
        }
+
        for(i=0;i<s.size();i++)
        {
         x=s[i];
       
-        if((x>='0'&&x<='9')||(x>='a'&&x<='z')||(x>='A'&&x<='Z')||x=='_'||x=='$')
-        {
-            
-        }
-        else
-        {
-            res=1;
-        }
-
+        if(!((x>='0'&&x<='9')||(x>='a'&&x<='z')||(x>='A'&&x<='Z')||x=='_'||x=='$'))
+       {
+        res=1;
        }
+       }
+
         if(res==1)
         {
             cout<<"CE"<<endl;
             
         }
         else
-        cout<<"OK"<<i<<endl;
+        cout<<"OK"<<endl;
        
     }
     system("pause");

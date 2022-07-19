@@ -10,7 +10,17 @@ void check()
 {
     for(int i=1;i<=x-1;i++)
     {
-        
+       int j=i+1;
+       while (b[j]==1&&j<=x)
+       {
+        j++;
+       }
+       if(j>x) continue;
+       else
+       {
+        b[i]=1,b[j]=1;
+       }
+       
 
     }
 }
@@ -21,7 +31,7 @@ int main()
     for(int i=0;i<n;++i)
     {
         scanf("%d",&x);
-      for(int j=0;j<x;j++)
+      for(int j=1;j<=x;j++)
       {
         scanf("%d",&a[j]);
       }
